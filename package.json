@@ -10,7 +10,8 @@
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "yarn test -- --watch",
     "test:staged": "yarn test -- --findRelatedTests",
-    "test:coverage": "yarn test -- --coverage"
+    "test:coverage": "yarn test -- --coverage",
+    "prepare": "husky install"
   },
   "repository": "git@github.com:gabrielsos/clean-arch-nodejs.git",
   "author": "Gabriel Silva <gabrielsos99@gmail.com>",
@@ -25,6 +26,7 @@
     "eslint-plugin-import": "2",
     "eslint-plugin-node": "11",
     "eslint-plugin-promise": "4",
+    "husky": "^7.0.1",
     "jest": "^27.0.6",
     "lint-staged": "^11.0.1",
     "ts-jest": "^27.0.3",
