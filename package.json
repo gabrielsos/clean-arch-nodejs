@@ -1,0 +1,17 @@
+{
+  "name": "clean-arch-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf dist && tsc"
+  },
+  "repository": "git@github.com:gabrielsos/clean-arch-nodejs.git",
+  "author": "Gabriel Silva <gabrielsos99@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "rimraf": "^3.0.2"
+  }
+}
