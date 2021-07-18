@@ -3,9 +3,17 @@
     "outDir": "dist",
     "rootDir": "src",
     "target": "es2019",
+    "sourceMap": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "sourceMap": true
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"],
+      "@/tests/*": ["../tests/*"]
+    }
   },
   "include": ["src"]
 }
