@@ -1,4 +1,5 @@
-import { FacebookAuthentication } from './../../../src/domain/features/facebook-authentication'
+import { LoadFacebookUserApi } from '@/data/contracts/api/facebook'
+import { FacebookAuthentication } from '@/domain/features/facebook-authentication'
 class FacebookAuthenticationService {
   constructor (
     private readonly loadFacebookUserApi: LoadFacebookUserApi
@@ -6,16 +7,6 @@ class FacebookAuthenticationService {
 
   async perform ({ token }: FacebookAuthentication.Params): Promise<void> {
     await this.loadFacebookUserApi.loadUser({ token })
-  }
-}
-
-interface LoadFacebookUserApi {
-  loadUser: (params: LoadFacebookUserApi.Params) => Promise<void>
-}
-
-namespace LoadFacebookUserApi {
-  export type Params = {
-    token: string
   }
 }
 
