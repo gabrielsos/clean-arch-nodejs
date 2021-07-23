@@ -10,8 +10,8 @@
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "yarn test -- --watch",
     "test:staged": "yarn test -- --findRelatedTests",
-    "test:coverage": "yarn test -- --coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test:coverage": "yarn test -- --coverage"
   },
   "repository": "git@github.com:gabrielsos/clean-arch-nodejs.git",
   "author": "Gabriel Silva <gabrielsos99@gmail.com>",
