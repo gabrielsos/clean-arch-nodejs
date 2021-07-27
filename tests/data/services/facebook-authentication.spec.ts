@@ -16,21 +16,27 @@ describe('FacebookAuthenticationService', () => {
   let crypto: MockProxy<TokenGenerator>
   let userAccountRepo: MockProxy<LoadUserAccountRepository & SaveFacebookAccountRepository>
   let sut: FacebookAuthenticationService
-  const token = 'any_token'
+  let token: string
 
-  beforeEach(() => {
+  beforeAll(() => {
+    token = 'any_token'
     facebookApi = mock()
+
     facebookApi.loadUser.mockResolvedValue({
       name: 'any_fb_name',
       email: 'any_fb_email',
       facebookId: 'any_fb_id'
     })
+
     userAccountRepo = mock()
     userAccountRepo.load.mockResolvedValue(undefined)
     userAccountRepo.saveWithFacebook.mockResolvedValue({ id: 'any_account_id' })
 
     crypto = mock()
     crypto.generateToken.mockResolvedValue('any_generated_token')
+  })
+
+  beforeEach(() => {
     sut = new FacebookAuthenticationService(
       facebookApi,
       userAccountRepo,
@@ -90,28 +96,28 @@ describe('FacebookAuthenticationService', () => {
   })
 
   it('should rethrow if LoadFacebookUserApi throws', async () => {
-    facebookApi.loadUser.mockRejectedValue(new Error('fb_error'))
+    facebookApi.loadUser.mockRejectedValueOnce(new Error('fb_error'))
     const promise = sut.perform({ token })
 
     await expect(promise).rejects.toThrow(new Error('fb_error'))
   })
 
   it('should rethrow if LoadUserAccountRepository throws', async () => {
-    userAccountRepo.load.mockRejectedValue(new Error('load_error'))
+    userAccountRepo.load.mockRejectedValueOnce(new Error('load_error'))
     const promise = sut.perform({ token })
 
     await expect(promise).rejects.toThrow(new Error('load_error'))
   })
 
   it('should rethrow if SaveFacebookAccountRepository throws', async () => {
-    userAccountRepo.saveWithFacebook.mockRejectedValue(new Error('save_error'))
+    userAccountRepo.saveWithFacebook.mockRejectedValueOnce(new Error('save_error'))
     const promise = sut.perform({ token })
 
     await expect(promise).rejects.toThrow(new Error('save_error'))
   })
 
   it('should rethrow if TokenGenerator throws', async () => {
-    crypto.generateToken.mockRejectedValue(new Error('token_error'))
+    crypto.generateToken.mockRejectedValueOnce(new Error('token_error'))
     const promise = sut.perform({ token })
 
     await expect(promise).rejects.toThrow(new Error('token_error'))
